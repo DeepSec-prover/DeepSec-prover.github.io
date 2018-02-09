@@ -4,3 +4,4 @@ description: DEciding Equivalence Properties in SECurity protocols
 header_pages:
   - page1.md
   - page2.md
+toc: true
