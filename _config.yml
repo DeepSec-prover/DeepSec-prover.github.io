@@ -1,3 +1,7 @@
 theme: jekyll-theme-cayman
 title: DeepSec
 description: DEciding Equivalence Properties in SECurity protocols
+
+header_pages:
+  - about.md
+  - portfolio.md
