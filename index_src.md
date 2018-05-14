@@ -1,4 +1,31 @@
+---
+  author:
+    - name : Vincent Cheval
+      webpage : https://members.loria.fr/vcheval
+    - name : Steve Kremer
+      webpage : https://members.loria.fr/SKremer
+    - name : Itsaka Rakotonirina
+      webpage : http://www.dptinfo.ens-cachan.fr/~irakoton
+
+  title: DeepSec prover
+  pagetitle: Index
+  mainpagetitle:
+  navigation: false
+
+  next_page:
+  next_page_url:
+  prev_page:
+  prev_page_url:
+
+  link-citations: true
+
+  nocite: |
+    @*
+---
+
 Automated verification has become an essential part in the security evaluation of cryptographic protocols. Recently, there has been a considerable effort to lift the theory and tool support that existed for reachability properties to the more complex case of equivalence properties. In this paper we contribute both to the theory and practice of this verification problem.  We establish new complexity results for static equivalence, trace equivalence and labelled bisimilarity and propose a new decision procedure for these equivalences in the case of a bounded number of sessions. Our procedure provides the first tool to decide trace equivalence and labelled bisimilarity exactly for a large variety of cryptographic primitives---those that can be represented by a subterm convergent destructor rewrite system. We implemented the procedure in a new tool, **DeepSec**. We perform an extensive experimental verification showing that our tool is significantly more efficient than many other similar tools, while at the same time raises the scope of the protocols that can be analyzed.
+
+Test for citations [@CKR-sp18].
 
 ## How to install DeepSec?
 
@@ -136,3 +163,7 @@ deepsec -distributed 20 -distant_workers login1@host1 tools/deepsec 15 -distant_
 In this command line, the first machine should be accessible with `ssh login1@host1` and the **DeepSec** directory should be located at `~/tools/deepsec` on this machine. Similarly, the second machine should be accessible with `ssh login2@host1` and the **DeepSec** directory should be located at `~/deepsec`. If the connexions to both machines are successful, **DeepSec** will distribute the computation of the file `my_file.dps` between 20 local cores, 15 cores on the first machine and 35 on the second machine.
 
 **_IMPORTANT_**: The localhost and distant machines should have exactly the same version of **DeepSec** (The Git hash is displayed when running `deepsec` without parameters or with the option `-help`) compiled with the same version of **OCaml**.
+
+# Publications
+
+<div id="refs"></div>
