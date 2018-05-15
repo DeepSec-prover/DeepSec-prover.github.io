@@ -17,7 +17,9 @@ SRC = $(sort $(wildcard manual/*.md)) index_src.md manual.md
 OBJ = $(subst .md,.html,$(SRC))
 SRCPDF = manual.tex manual/install.tex manual/tutorial.tex manual/grammar.tex manual/command.tex
 
-all: $(OBJ) $(SRCPDF)
+all: $(OBJ) DeepSec-manual.pdf
+
+DeepSec-manual.pdf: $(SRCPDF)
 	pdflatex template/main.tex
 	biber main
 	pdflatex template/main.tex
