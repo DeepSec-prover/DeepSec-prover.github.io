@@ -22,7 +22,7 @@
   prev_page_url: manual/grammar.html
 ---
 
-# Command-line options
+## Command-line options
 
 Command-line options of DeepSec.
 

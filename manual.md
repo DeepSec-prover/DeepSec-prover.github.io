@@ -19,9 +19,9 @@
   prev_page_url:
 ---
 
-The manual of **DeepSec** is also available in [PDF](manual.pdf "PDF manual of the DeepSec prover").
-
 ## Introduction
+
+Test for citations [@CKR-sp18].
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam a dui volutpat, placerat ante eu, tempor purus. Cras tempor id turpis quis mollis. Integer a orci fermentum, tempor mauris porta, pharetra risus. Nullam eu blandit justo, non dapibus purus. Praesent in magna non sem semper vestibulum. Ut semper bibendum sem varius eleifend. Morbi feugiat malesuada sapien eu facilisis. Vivamus mattis enim ac suscipit commodo. Vivamus ac purus venenatis, viverra purus non, eleifend mauris. Fusce laoreet nisi sed nunc blandit vulputate ut ut velit. Etiam ac orci eget elit posuere viverra sit amet eu justo.
 

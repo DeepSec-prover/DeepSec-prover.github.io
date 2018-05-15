@@ -21,7 +21,7 @@
   prev_page_url: manual.html
 ---
 
-# Installation
+## Installation
 
 Installation of `DeepSec`
 

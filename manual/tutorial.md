@@ -21,7 +21,7 @@
   prev_page_url: manual/install.html
 ---
 
-# Tutorial
+## Tutorial
 
 Tutorial of `DeepSec`
 

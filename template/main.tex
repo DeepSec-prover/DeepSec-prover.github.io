@@ -1,0 +1,102 @@
+\documentclass[a4paper,11pt]{article}
+
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{a4wide}
+
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+
+\usepackage{hyperref}
+
+\usepackage{authblk}
+\usepackage{cleveref}
+\usepackage{paralist}
+\usepackage{xspace}
+\usepackage{color}
+
+\usepackage{thm-restate}
+\usepackage{thmtools}
+
+\usepackage{rotating}
+
+\usepackage{bussproofs}
+
+\usepackage{enumitem}
+
+\usepackage{stmaryrd}
+\usepackage[ruled,vlined]{algorithm2e}
+
+%%%% Bibliography
+\usepackage[
+  backend=biber,
+  style=alphabetic,
+  citestyle=authoryear
+  ]{biblatex}
+
+\addbibresource{biblio.bib}
+
+
+%%%
+
+
+
+%%% Theorems, Definition, Lemmas
+
+
+
+\declaretheorem{theorem}
+\declaretheorem{lemma}
+\declaretheorem{definition}
+\declaretheorem{corollary}
+\declaretheorem{proposition}
+\declaretheorem{property}
+
+
+\declaretheoremstyle[spaceabove=6pt, spacebelow=6pt,  headfont=\itshape,  notefont=\mdseries, notebraces={(}{)},bodyfont=\normalfont,  postheadspace=1em,  qed=$\blacktriangleright$]{examplestyle}
+\declaretheorem[style=examplestyle]{remark}
+\declaretheorem[style=examplestyle]{example}
+
+\crefname{equation}{clause}{clauses}
+\Crefname{equation}{Clause}{Clauses}
+
+%%% Macros
+
+\input{template/macro-command}
+
+%%% Comments and modification
+
+\usepackage{todonotes}
+
+%%% Informations
+
+\title{DeepSec 1.0:\\DEciding Equivalence Properties in SECurity protocols\\User manual}
+
+\author[1]{Vincent Cheval}
+\author[1]{Steve Kremer}
+\author[1]{Itsaka Rakotonirina}
+
+\affil[2]{Inria Nancy, LORIA, Universit\'e de Lorraine, France}
+
+
+\begin{document}
+
+\maketitle
+
+\newpage
+
+\tableofcontents
+
+\newpage
+
+\input{manual}
+\input{manual/install}
+\input{manual/tutorial}
+\input{manual/grammar}
+\input{manual/command}
+
+\printbibliography
+
+\end{document}
