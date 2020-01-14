@@ -41,9 +41,9 @@ Note that two executable programs are compile at the same time as `deepsec`: `de
 
 1. For MacOSX: [deepsec-ui-1.0.0-rc2_OSX.dmg](https://github.com/DeepSec-prover/deepsec_ui/releases/download/v1.0.0-rc2/deepsec-ui-1.0.0-rc2_OSX.dmg)
 2. For Linux:
-  - Debian: [deepsec-ui-1.0.0-rc2_amd64.deb](https://github.com/DeepSec-prover/deepsec_ui/releases/download/v1.0.0-rc/deepsec-ui-1.0.0-rc2_amd64.deb)
-  - Snapshot: [deepsec-ui-1.0.0-rc2_amd64.snap](https://github.com/DeepSec-prover/deepsec_ui/releases/download/v1.0.0-rc/deepsec-ui-1.0.0-rc2_amd64.snap)
-  - AppImage: [deepsec-ui-1.0.0-rc2.AppImage](https://github.com/DeepSec-prover/deepsec_ui/releases/download/v1.0.0-rc/deepsec-ui-1.0.0-rc2.AppImage)
+  - Debian: [deepsec-ui-1.0.0-rc2_amd64.deb](https://github.com/DeepSec-prover/deepsec_ui/releases/download/v1.0.0-rc2/deepsec-ui-1.0.0-rc2_amd64.deb)
+  - Snapshot: [deepsec-ui-1.0.0-rc2_amd64.snap](https://github.com/DeepSec-prover/deepsec_ui/releases/download/v1.0.0-rc2/deepsec-ui-1.0.0-rc2_amd64.snap)
+  - AppImage: [deepsec-ui-1.0.0-rc2.AppImage](https://github.com/DeepSec-prover/deepsec_ui/releases/download/v1.0.0-rc2/deepsec-ui-1.0.0-rc2.AppImage)
 
 To work, **DeepSec UI** requires to know where is located the executable `deepsec_api` that was installed by **DeepSec**. When **DeepSec** will be installed through `opam` in the foreseeable future, it will be added in your `PATH` environment automatically and so **DeepSec UI** will find it itself. Thus currently, either you can add `deepsec_api` in your `PATH` or you can manually indicate to **DeepSec UI** where it is located (in the **Settings** menu of **DeepSec UI**).
 
