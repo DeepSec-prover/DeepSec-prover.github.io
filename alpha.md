@@ -55,7 +55,7 @@ If you have a feature request or if there is something that is not very intuitiv
 ## Known issues
 
 We are currently aware of two issues that you're trying to solve before the full release:
-1. Quitting **DeepSec UI** also terminates all the runs of **DeepSec** that were launch through **DeepSec UI**. Note that the runs of **DeepSec** that were launched independently keeps running.
+1. Quitting **DeepSec UI** also terminates all the runs of **DeepSec** that were launch through **DeepSec UI** and they still appear as **In Progress** when relaunching the UI. The intended behavior is that **DeepSec** keeps running in the back ground even when **DeepSec UI** is closed. Note that this issue does not affect the runs of **DeepSec** that were launched using command-line.
 2. When using the classic semantics (option `-s classic` in command line), the memory used can increase very rapidly. We're working on keeping it lower for the next patch.
 
 ## Thank you again for testing DeepSec and DeepSec UI !!
