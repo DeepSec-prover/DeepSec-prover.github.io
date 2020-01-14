@@ -70,5 +70,6 @@ We are currently aware of two issues that we are trying to solve before the full
 1. Quitting **DeepSec UI** also terminates all the runs of **DeepSec** that were launched through **DeepSec UI** and they still appear as **In Progress** when relaunching the UI. The intended behavior is that **DeepSec** keeps running in the back ground even when **DeepSec UI** is closed. Note that this issue does not affect the runs of **DeepSec** that were launched using the command-line.
 2. When using the classic semantics (option `-s classic` in command line), the memory used can increase very quickly. We are working on keeping it lower.
 3. In  **DeepSec UI**, the button `redo` that appears when using the attack and equivalence simulator is currently disabled.
+4. A Javascript error is trigger when quitting the application after using the simulator or display of attack. See [Issue #61](https://github.com/DeepSec-prover/deepsec_ui/issues/61)
 
 ## Thank you again for testing DeepSec and DeepSec UI !!
