@@ -37,10 +37,13 @@ Note that two executable programs are compile at the same time as `deepsec`: `de
 
 ## Installation of DeepSec UI
 
-**DeepSec UI** has been packaged so you don't need to compile it from the source. Just download the version according to your OS and double click.
+**DeepSec UI** has been packaged so you don't need to compile it from the source. Just download the version according to your OS and double click. If you need another distribution, please feel free to ask (other than windows...)
 
-1. For MacOSX : <https://members.loria.fr/VCheval/deepsec_alpha/DeepSec_UI_alpha_OSX.dmg>
-2. For Linux: <https://members.loria.fr/VCheval/deepsec_alpha/DeepSec_UI_alpha_Linux.dmg>
+1. For MacOSX: [DeepSecUI-1.0.0-rc.dmg](https://members.loria.fr/VCheval/deepsec_alpha/DeepSecUI-1.0.0-rc.dmg)
+2. For Linux:
+  - Debian: [deepsec_ui_1.0.0-rc_amd64.deb](https://members.loria.fr/VCheval/deepsec_alpha/deepsec_ui_1.0.0-rc_amd64.deb)
+  - Snapshot: [deepsec_ui_1.0.0-rc_amd64.snap](https://members.loria.fr/VCheval/deepsec_alpha/deepsec_ui_1.0.0-rc_amd64.snap)
+  - AppImage: [DeepSec-UI-1.0.0-rc.AppImage](https://members.loria.fr/VCheval/deepsec_alpha/DeepSec-UI-1.0.0-rc.AppImage)
 
 To work, **DeepSec UI** requires to know where is located the executable `deepsec_api` that was installed by **DeepSec**. When **DeepSec** will be installed through `opam` in the foreseeable future, it will be added in your `PATH` environment automatically and so **DeepSec UI** will find it itself. Thus currently, either you can add `deepsec_api` in your `PATH` or you can manually indicate to **DeepSec UI** where it is located (in the **Settings** menu of **DeepSec UI**).
 
