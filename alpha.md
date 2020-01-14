@@ -47,11 +47,11 @@ To work, **DeepSec UI** requires to know where is located the executable `deepse
 ## Using DeepSec UI
 
 If we have done our job correctly, using DeepSec UI should be quite intuitive. Small precision with respect to the equivalence simulator and the display of attack trace:
-1. A term `#n` represents a public name of the attacker
-2. The projections of tuples are displayed as `Π<sub>i,j</sub>`. For example, `Π<sub>2,4</sub>` is the second projection of the 4-tuple. When using the equivalence simulator, projections should be written 'proj_{i,j}' when inputing a recipe
-3. Axioms are displayed as `ax<sub>i</sub>` and should be written `ax_i` in the equivalence simulator when inputing a recipe.
+1. A term #n represents a public name of the attacker
+2. The projections of tuples are displayed as Π<sub>i,j</sub>. For example, Π<sub>2,4</sub> is the second projection of the 4-tuple. When using the equivalence simulator, projections should be written proj_{i,j} when inputing a recipe
+3. Axioms are displayed as ax<sub>i</sub> and should be written ax_i in the equivalence simulator when inputing a recipe.
 
-We should find an intuitive way to explain these before the final realease.
+We should find an intuitive way to explain these before the final release.
 
 
 ## Bug report, feature request, etc.
