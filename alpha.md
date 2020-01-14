@@ -37,7 +37,7 @@ Note that two executable programs are compile at the same time as `deepsec`: `de
 
 ## Installation of DeepSec UI
 
-**DeepSec UI** has been packaged so you don't need to compile it from the source. Just download the version according to your OS and double click. If you need another distribution, please feel free to ask (other than windows...)
+**DeepSec UI** has been packaged so you don't need to compile it from the source. Just download the version according to your OS and double click. You can also directly visit [DeepSec UI Releases](https://github.com/DeepSec-prover/deepsec_ui/releases) to get the lastest version. If you need another distribution, please feel free to ask (other than windows...)
 
 1. For MacOSX: [deepsec-ui-1.0.0-rc2_OSX.dmg](https://github.com/DeepSec-prover/deepsec_ui/releases/download/v1.0.0-rc2/deepsec-ui-1.0.0-rc2_OSX.dmg)
 2. For Linux:
