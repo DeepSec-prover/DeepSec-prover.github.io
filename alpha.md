@@ -33,7 +33,7 @@ Once the alpha version has been tested, we foresee to provide an `opam` package 
 4. Inside the directory `deepsec`, run `make`
 5. The executable program `deepsec` has been built.
 
-Note that two additional executables ared compile at the same time as `deepsec`: `deepsec_worker` and `deepsec_api`. The former is used by **DeepSec** to distribute the computation on multi-core architectures and clusters of computers. The latter is used to communicate with **DeepSec UI**. Both should not be used manually nor should they be moved from the `deepsec` folder.
+Note that two additional executables are compiled at the same time as `deepsec`: `deepsec_worker` and `deepsec_api`. The former is used by **DeepSec** to distribute the computation on multi-core architectures and clusters of computers. The latter is used to communicate with **DeepSec UI**. Both should not be used manually nor should they be moved from the `deepsec` folder.
 
 ## Installation of DeepSec UI
 
@@ -62,14 +62,5 @@ We should find an intuitive way to explain these before the final release.
 If you find a bug while testing, you can send me an [email](mailto:vincent.cheval@inria.fr) or go to the GitHub webpage of **[DeepSec](https://github.com/DeepSec-prover/deepsec/issues)** and **[DeepSec UI](https://github.com/DeepSec-prover/deepsec_ui/issues)**. Please send the error message, the .dps file and describe how the bug arised as much as you can.
 
 If you have a feature request or if there is something that is not very intuitive, feel free to also leave a comment. This will greatly help us improve the tool.
-
-
-## Known issues
-
-We are currently aware of two issues that we are trying to solve before the full release:
-1. Quitting **DeepSec UI** also terminates all the runs of **DeepSec** that were launched through **DeepSec UI** and they still appear as **In Progress** when relaunching the UI. The intended behavior is that **DeepSec** keeps running in the back ground even when **DeepSec UI** is closed. Note that this issue does not affect the runs of **DeepSec** that were launched using the command-line.
-2. When using the classic semantics (option `-s classic` in command line), the memory used can increase very quickly. We are working on keeping it lower.
-3. In  **DeepSec UI**, the button `redo` that appears when using the attack and equivalence simulator is currently disabled.
-4. A Javascript error is trigger when quitting the application after using the simulator or display of attack. See [Issue #61](https://github.com/DeepSec-prover/deepsec_ui/issues/61)
 
 ## Thank you again for testing DeepSec and DeepSec UI !!
