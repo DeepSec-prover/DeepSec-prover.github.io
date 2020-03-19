@@ -3,11 +3,21 @@
 \usepackage[english]{babel}
 \usepackage[T1]{fontenc}
 \usepackage{a4wide}
+\usepackage[tt=false]{libertine}
+\usepackage{textcomp}
+
+
+
+
+\usepackage{graphicx}
 
 
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{amsthm}
+
+\usepackage[libertine]{newtxmath}
+
 
 \usepackage{hyperref}
 
@@ -42,6 +52,8 @@
 %%%
 
 
+\newcommand{\version}{2.0.0}
+
 
 %%% Theorems, Definition, Lemmas
 
@@ -72,7 +84,9 @@
 
 %%% Informations
 
-\title{DeepSec 1.0:\\DEciding Equivalence Properties in SECurity protocols\\User manual}
+
+
+\title{DeepSec:\\\\User manual}
 
 \author[1]{Vincent Cheval}
 \author[1]{Steve Kremer}
@@ -81,9 +95,49 @@
 \affil[2]{Inria Nancy, LORIA, Universit\'e de Lorraine, France}
 
 
+\definecolor{titlepagebgcolor}{cmyk}{1,.10,0,0}
+\definecolor{titlepagetextcolor}{cmyk}{0,0,0.0745,0}
+
 \begin{document}
 
-\maketitle
+
+\begin{titlepage}
+
+  \color{titlepagetextcolor}
+  \begin{center}
+    \vspace*{1cm}
+    \pagecolor{titlepagebgcolor}
+    
+    \includegraphics[width=0.8\textwidth]{logo/logo-full.png}
+    
+    
+    \textbf{DEciding Equivalence Properties in SECurity protocols}
+    
+    \vspace{0.5cm}
+    {\Large User manual}
+
+    version~\version
+    
+    \vspace{1.5cm}
+    
+    \textbf{Vincent Cheval, Steve Kremer and Itsaka Rakotonirina}
+
+    \medskip
+    Université de Lorraine, Inria Nancy Grand-Est, LORIA
+    
+    \medskip
+    
+    \today
+       
+                   
+     \end{center}
+   \color{black}
+ \end{titlepage}
+
+\pagecolor{white}
+
+
+%\maketitle
 
 \newpage
 
@@ -91,11 +145,11 @@
 
 \newpage
 
-\input{manual}
-\input{manual/install}
-\input{manual/tutorial}
-\input{manual/grammar}
-\input{manual/command}
+\input{manual} \newpage
+\input{manual/install} \newpage
+\input{manual/tutorial} \newpage
+\input{manual/grammar} \newpage
+\input{manual/command} \newpage
 
 \printbibliography
 

@@ -34,20 +34,67 @@
   note =	 {Accepted for publication},
 }
 
+
 @inproceedings{CKR-cav18,
   abstract =	 {In this paper we describe the DeepSec prover, a tool
                   for security-protocol analysis deciding equivalence
                   properties, modelled as trace equivalence of two
                   processes in a dialect of the applied pi calculus.},
   address =	 {Oxford, UK},
-  author =	 {Cheval, Vincent and Kremer, Steve and Rakotonirina, Itsaka},
+  author =	 {Cheval, Vincent and Kremer, Steve and Rakotonirina,
+                  Itsaka},
   booktitle =	 {{P}roceedings of the 30th International Conference
-                  on Computer Aided Verification ({CAV}'18)},
+                  on Computer Aided Verification, Part II (CAV'18)},
+  doi =		 {10.1007/978-3-319-96142-2_4},
   month =	 jul,
   publisher =	 {Springer},
   title =	 {The DEEPSEC prover},
   year =	 2018,
   acronym =	 {CAV'18},
-  nmonth =	 7,
-  note =	 {To appear},
+  url =		 {https://hal.inria.fr/hal-01763138/document},
 }
+
+
+@InProceedings{CKR-ccs19,
+  abstract =	 {Verification of privacy-type properties for
+                  cryptographic protocols in an active adversarial
+                  environment, modelled as a behavioural equivalence
+                  in concurrent-process calculi, exhibits a high
+                  computational complexity. While undecidable in
+                  general, for some classes of common cryptographic
+                  primitives the problem is coNEXP-complete when the
+                  number of honest participants is bounded. \par In
+                  this paper we develop optimisation techniques for
+                  verifying equivalences, exploiting symmetries
+                  between the two processes under study.  We
+                  demonstrate that they provide a significant (several
+                  orders of magnitude) speed-up in practice, thus
+                  increasing the size of the protocols that can be
+                  analysed fully automatically. },
+  address =	 {London, UK},
+  author =	 {Cheval, Vincent and Kremer, Steve and Rakotonirina,
+                  Itsaka},
+  booktitle =	 {{P}roceedings of the 26th ACM Conference on Computer
+                  and Communications Security (CCS'19)},
+  month =	 nov,
+  pages =        {905--922},
+  publisher =	 {ACM},
+  title =	 {Exploiting Symmetries When Proving Equivalence
+                  Properties for Security Protocols},
+  year =	 2019,
+  acronym =	 {{CCS}'19},
+  nmonth =	 11,
+  doi =		 {10.1145/3319535.3354260},
+}
+
+@article{AF-tcs04,
+  author    = {Martín Abadi and
+               Cédric Fournet},
+  title     = {Private authentication},
+  journal   = {Theor. Comput. Sci.},
+  volume    = {322},
+  number    = {3},
+  pages     = {427--476},
+  year      = {2004},
+}
+
