@@ -1,0 +1,6 @@
+manual/*.tex
+manual/*.html
+template/main.tex
+/*.tex
+/*.html
+/*.pdf
