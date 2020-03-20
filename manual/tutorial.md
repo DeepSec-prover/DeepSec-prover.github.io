@@ -5,7 +5,7 @@
     - name : Steve Kremer
       webpage : https://members.loria.fr/SKremer
     - name : Itsaka Rakotonirina
-      webpage : http://www.dptinfo.ens-cachan.fr/~irakoton
+      webpage : https://members.loria.fr/IRakotonirina
 
   title: DeepSec prover
   pagetitle: Manual - A small example
@@ -39,7 +39,7 @@ Alice (A) makes a connection request to Bob (B). For this Alice sends the asymme
 The modelling of the PAP protocol in **deepsec** is available in the file
 
 ```
-Examples/trace_equivalence/Private_authentication/PrivateAuthentication-1session.dps
+  Examples/trace_equivalence/Private_authentication/PrivateAuthentication-1session.dps
 ```
 
 in the **deepsec** directory.
