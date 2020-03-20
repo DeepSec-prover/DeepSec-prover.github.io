@@ -1,7 +1,8 @@
 
-PANDOC = pandoc
+PANDOC = pandoc --syntax-definition deepsec.xml
 IFORMAT = markdown
-FLAGS = --standalone --toc --toc-depth=2 --mathjax=$(MATHJAX)
+# FLAGS = --standalone --toc --toc-depth=2 --mathjax=$(MATHJAX)
+FLAGS = --standalone --mathjax=$(MATHJAX)
 STYLE = css/style.css
 
 ifdef MATHJAX_LOCAL
@@ -15,7 +16,7 @@ TEMPLATE_LATEX = template/template.tex
 
 SRC = $(sort $(wildcard manual/*.md)) index_src.md manual.md
 OBJ = $(subst .md,.html,$(SRC))
-SRCPDF = manual.tex manual/install.tex manual/tutorial.tex manual/grammar.tex manual/command.tex
+SRCPDF = manual.tex manual/install.tex manual/tutorial.tex manual/grammar.tex manual/command.tex template/main.tex
 
 all: $(OBJ) DeepSec-manual.pdf
 
@@ -55,5 +56,9 @@ manual/%.tex: manual/%.md
 		--csl=ieee.csl\
 	  -t html -o $@ $<
 
+template/main.tex: template/main.md
+	$(PANDOC) $(FLAGS) template/main.md -o template/main.tex
+
+
 clean:
-	-rm -f manual/*.html *.html *.tex manual/*.tex
+	-rm -f manual/*.html *.html *.tex manual/*.tex template/main.tex
