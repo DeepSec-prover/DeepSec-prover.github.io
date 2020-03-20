@@ -111,7 +111,7 @@ arguments in encryption and decryption) then the result of applying
 decryption returns the plaintext `x`.
 
 
-> **NOTE**: constructor-destructor algebras
+> **Note**: constructor-destructor algebras
 >
 > You may have noticed that we did not declare the `adec` symbol. This
 >is because `adec` is a _destructor_, while declared function symbols
@@ -122,18 +122,26 @@ decryption returns the plaintext `x`.
 
 
 
-> **NOTE**: deterministic vs randomized encryption
+> **Note**: deterministic vs randomized encryption
 >
-> Example why sometimes randomized encryption is needed.
+>You may also note that we modelled encryption as a _deterministic_
+>function. Of course, a secure encryption scheme needs to be
+>randomized, but in this particular example this simplified version is
+>sufficient. This means in particular that the attacker can
+>distinguish messages `aenc(0,pk(ska))` and `aenc(1,pk(ska))` where
+>`0` and `1` are constants as he could simply re-encrypt these
+>constants (supposing he knows the public key). It is however easy to
+>model asymmetric encryption by adding a random element, making `aenc`
+>a ternary function.
 
 
 
 ### Modelling protocols as processes
 
-<span style="color:red">**To complete.**</span>
-
-
-Alice's role
+We now need to model the behaviour of Alice and Bob. One can think of
+a protocol as a distributed program. Each local program of this system
+will be represented by a _process_.  We can model Alice's role by the
+following process `processA`.
 
 ```{.deepsec}
   let processA(ca,ska,pkb) =
@@ -142,7 +150,29 @@ Alice's role
     in(ca,x).
 ```
 
-Bob's role
+The process has 3 arguments: `ca` is the channel on which the process
+communicates, `ska` is the secret key of the agent running this
+process, and `pkb` is the public key of the agent to whom we want to
+connect. First, the process generates a fresh random nonce using the command
+`new na`. Next, it sends on channel `ca` the encryption of the pair `(na,pk(ska))`
+encrypted with the recipient's public key `pkb`, as dictated by the
+protocol. Finally, the process expects an input, modelled as
+`in(ca,x)`. Normally, one would expect additional processing of the
+input message, which we omit here for simplification.
+
+
+> **Note** private names vs new names
+>
+>In the above example we use `new na` to create a fresh, private name
+>na. This is again equivalent to declaring a free, private name, as we
+>did for `ska, skb` and `skb`. However, the `new` construct is useful
+>when a different, fresh name should be created in every instance of
+>the process: if we execute several instances of `processA` a distinct
+>fresh name `na` is created in each copy. 
+
+
+Next, we model Bob's behaviour by the process `processB`.
+
 
 ```{.deepsec}
   let processB(cb,skb,pka) =
@@ -153,7 +183,45 @@ Bob's role
     else out(cb,aenc(nb,pk(skb))).
 ```
 
-and the main process
+This process introduces several new constructs that require
+explanations. The first action of the process is to input a message on
+channel `cb` through the instruction `in(cb,yb)`. As a consequence the
+message that is received will be bound to the variable `yb`. While the
+expected message is `aenc((na,pka)),pk(skb))` we need to keep in mind
+that this message may actually be provided by the attacker and may be
+an arbitrary message the attacker is able to forge. Therefore we need
+to _parse_ the message and perform a number of tests. All of this is
+done here in a condensed form using a `let` instruction. We first
+decrypt (apply `adec`) the received message (referred to by the
+variable `yb`) with the secret key `skb`. Note that if decryption
+fails, we will enter the `else` branch of the `let` instruction. Next,
+we check that the results is a pair: the first element of the pair is
+bound to the variable `yna` and we check that the second variable of
+the pair equals the public key `pka`, i.e., the public key of a person
+we accept connections from. An expanded form could be written as
+follows.  ```{.deepsec} let yplain = adec(yb,skb) in let (yna,ypka) =
+yplain in if ypka = pka then out(cb,aenc((yna,nb,pk(skb)),pka)) else
+out(cb,aenc(nb,pk(skb))); else out(cb,aenc(nb,pk(skb))).  else
+out(cb,aenc(nb,pk(skb))).  ``` This form is however rather lengthy and
+requires duplicating else branches, which is why the above syntactic
+sugar is often convenient.
+
+> **Note:** tuples in **deepsec**
+>
+> We have seen in the above example that we used notations `(a,b)` and
+> `(a,b,c)` for tuples without explicitly declaring function symbols
+> for pairs and triples. Actually, **deepsec** has built-in support
+> for tuples. For each tuple of arity $n$ occurring in the processes
+> **deepsec** will define the constructor `(_, ... ,_)` of arity n
+> and corresponding destructors `reduc proj_i_n (x1, ... ,xi, ..., xn)
+> = xi` (for all $1\leq i \leq n$). These destructors are used
+> implicitly in the let instruction for projecting the elements of the
+> tuple.
+
+
+
+Finally, we put all the pieces together ia main process `ProcessAB`
+modelling the entire system.
 
 ```{.deepsec}
   let ProcessAB =
@@ -164,11 +232,16 @@ and the main process
       processA(ca,ska,pk(skb)) | processB(cb,skb,pk(ska))
     ).
 ```
+	
+The system first outputs the public keys, so that they become known to
+the attacker. Then the system indicates that processes `processA` and
+`processB` are executed in parallel (each with its parameters). 
 
+### Verifying private authentication
 
-### Verifying anonymity
-
-Add a "second" main process
+We are now interested in modelling anonymity. Anonymity is generally
+modelled as the indistinguishability of two systems. We therefore
+define a second system `ProcessCB`.
 
 ```{.deepsec}
   let ProcessCB =
@@ -180,26 +253,57 @@ Add a "second" main process
     ).
 ```
 
-and add query
+The difference with previous system `ProcessAB` is the parameter
+`skc`, rather than `ska`, given to `processA` and `processB`. Hence,
+`ProcessAB` models the situation where B is willing to receive
+connections only from A, while in `ProcessCB`, B accepts connections
+only from C. The goal of private authentication is to hide from whom
+connections are accepted. Indistinguishability can be modelled by
+trace equivalence. We can therefore query **deepsec** to check trace
+equivalence between these two systems.
+
 
 ```{.deepsec}
   query trace_equiv(ProcessAB,ProcessCB).
 ```
 
-
-To verify use command
+To verify this query we use the command 
 
 ```bash
   $ deepsec PrivateAuthentication-1session.dps
 ```
 
-Deepsec says trace equivalent.
+
+**deepsec** will indeed confirm that this kind of anonymity is satisfied
+by outputting (among some other messages) that
+
+```bash
+Result query 1: The two processes are not trace equivalent.
+```
+
+Looking at the protocol this is intuitively due to the decoy message
+sent in the `else` branch of `processB`. What happens when we remove
+the decoy message? For this we simply replace the else branch with
+`else 0` (or omit it completely), see the file
+`PrivateAuthentication-1session-attack.dps`. We can now run
+**deepsec** on this modified file.
+
+```bash
+  $ deepsec PrivateAuthentication-1session-attack.dps
+```
+
+This time, **deepsec** will report an attack:
+
+```bash
+Result query 1: The two processes are not trace equivalent.
+```
+
+Indeed, when the attacker sends the message
+`in(cb,aenc((n,pk(ska)),pk(skb)))` to B, only the first system will
+send a reply.
 
 
-What happens when we remove the decoy message? Attack found.
-
-
-### Distributing the computation
+### More complex scenarios and distributing the computation
 
 Big scenario increases computation time. Distribute the computation.
 
