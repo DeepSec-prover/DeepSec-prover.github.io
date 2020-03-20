@@ -8,6 +8,12 @@
 
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="$depth$style.css">
+
+  <!-- the following three lines seem needed to get syntax highlighting of
+  fenced code blocks -->
+  <style>
+    $styles.html()$
+  </style>
 </head>
 
 <body>
@@ -41,7 +47,10 @@
         <hr>
       </section>
       $endif$
-      $body$
+
+<!-- do not indent this line, may cause indentation problems in fenced code blocks! -->
+$body$
+
       <hr>
       <div class="footer-nav">
         <div class="footer-nav-Body">
