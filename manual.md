@@ -5,7 +5,7 @@
     - name : Steve Kremer
       webpage : https://members.loria.fr/SKremer
     - name : Itsaka Rakotonirina
-      webpage : http://www.dptinfo.ens-cachan.fr/~irakoton
+      webpage : https://members.loria.fr/IRakotonirina
 
   title: DeepSec prover
   pagetitle: Manual
@@ -38,12 +38,10 @@ Please report any bugs to [`vincent.cheval@inria.fr`](mailto:vincent.cheval@inri
 
 
 
-	
+
 
 
 
 ### Acknowledgements
 
 The research that led to **deepsec** was primarily supported by ERC under the EU’s H2020 research and innovation program (grant agreements No 645865-SPOOC), as well as from the French ANR projects SEQUOIA ( ANR-14-CE28-0030-01) and TECAP (ANR-17-CE39-0004-01).
-
-

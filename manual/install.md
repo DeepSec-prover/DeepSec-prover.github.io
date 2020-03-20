@@ -5,7 +5,7 @@
     - name : Steve Kremer
       webpage : https://members.loria.fr/SKremer
     - name : Itsaka Rakotonirina
-      webpage : http://www.dptinfo.ens-cachan.fr/~irakoton
+      webpage : https://members.loria.fr/IRakotonirina
 
   title: DeepSec prover
   pagetitle: Manual - Installation
@@ -75,7 +75,9 @@ To work, **DeepSec UI** requires to know the location of the executable `deepsec
 
 ### Editor modes
 
-The **deepsec** input language is very close to the one used by the **proverif** verification tool. You may use the proverif modes (pi mode) for `emacs` and `atom` distributed at [https://proverif.inria.fr](https://proverif.inria.fr).
+The **deepsec** input language is very close to the one used by the **proverif** verification tool.
+You may use the proverif modes (pi mode) for `emacs` and `atom` distributed at [https://proverif.inria.fr](https://proverif.inria.fr).
+A dedicated package for syntax highlighting, `language-deepsec`, is also available for installation within `atom`.
 
 
 <!-- Written by Steve -->
