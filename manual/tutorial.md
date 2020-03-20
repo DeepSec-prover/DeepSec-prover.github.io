@@ -48,31 +48,77 @@ in the **deepsec** directory.
 ### Modelling messages in **deepsec**
 
 
-<span style="color:red">**To complete.**</span>
+As in other symbolic models, protocol messages are modelled as
+*terms*. Therefore the first part of a **deepsec** file consists in
+the necessary declarations. To model PAP we first declare a few constants.
 
-Names, constants, etc.
 
 ```{.deepsec}
   free ca, cb, c.
   free ska, skb, skc [private].
 ```
 
-Declaring function symbols
+Here, `ca, cb, c` are so-called *free* names: they model public
+constants, that are known to the adversary. In PAP `ca, cb, c` will be
+channel names, as we will see below. On the other hand we need to
+declare *secret* keys. For this we use *private* names `ska, skb, skc`
+that are declared with the additional attribute `[private]`.
+
+
+Next, we need to declare function symbols to represent asymmetric encryption.
 
 ```{.deepsec}
   fun aenc/2.
   fun pk/1.
 ```
+The function symbol `aenc` is declared to be of arity 2 using the
+  notation `/2`. Public keys are of arity 1, as they are intended to
+  take a secret key as argument.
 
-Rewrite rules
+
+
+> **Note:** public names _vs_ function symbols of arity 0
+>
+> It is possible to declare function symbols of arity 0, e.g. write
+> `fun c/0`. This is equivalent to declaring a free name `free c`.
+
+
+
+> **Note:** alternate modelling of secret keys using private function symbols
+>
+>In the modelling proposed above, we intend to compute the
+>public key by applying the function `pk` to the secret key,
+>e.g. `pk(ska)` would be A's public key. An alternate way of modelling
+>can be to derive both the public and secret key from an identity: we
+>could declare a _private_ function symbol `fun sk/1
+>[private].`. Then, `pk(a)` and `sk(a)` represent A's public,
+>respectively private, key. Declaring the function symbol `sk` as
+>private implies that the attacker cannot apply this function symbol.
+
+
+Currently, we have declared function symbols `aenc` and `pk`, but
+nothing indicates that these functions represent asymmetric
+encryption. We will use _rewrite rules_ to give meaning to these
+function symbols.
 
 ```{.deepsec}
   reduc adec(aenc(x,pk(y)),y) -> x.
 ```
 
-> **NOTE**: constructor-destructor
+This rule indicates that an attacker can apply decryption `adec`; if
+the keys match (which is required as we use the same variable `y` as
+arguments in encryption and decryption) then the result of applying
+decryption returns the plaintext `x`.
+
+
+> **NOTE**: constructor-destructor algebras
 >
-> Explain difference between equations and reduc!
+> You may have noticed that we did not declare the `adec` symbol. This
+>is because `adec` is a _destructor_, while declared function symbols
+>are _constructors_. Destructors may actually not occur in protocol
+>messages: if the above rewrite rule does not succeed the evaluation
+>will _fail_. For example, the evaluation of the terms
+>`adec(aenc(m,pk(ska)),skb)` and `adec(c,ska)` would both fail.
 
 
 
