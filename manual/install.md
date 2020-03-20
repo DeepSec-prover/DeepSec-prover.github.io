@@ -75,9 +75,7 @@ To work, **DeepSec UI** requires to know the location of the executable `deepsec
 
 ### Editor modes
 
-The **deepsec** input language is very close to the one used by the **proverif** verification tool.
-You may use the proverif modes (pi mode) for `emacs` and `atom` distributed at [https://proverif.inria.fr](https://proverif.inria.fr).
-A dedicated package for syntax highlighting, `language-deepsec`, is also available for installation within `atom`.
+A dedicated package for syntax highlighting, `language-deepsec`, is available for installation within `atom`. Given that the **deepsec** input language is very close to the one used by the **proverif** verification tool you may use the proverif mode (proverif-pi-mode) for `emacs` distributed with [proverif](https://proverif.inria.fr).  
 
 
 <!-- Written by Steve -->
