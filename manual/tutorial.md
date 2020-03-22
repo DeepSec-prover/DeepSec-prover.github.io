@@ -320,11 +320,35 @@ Indeed, when the attacker sends the message
 send a reply.
 
 
-### More complex scenarios and distributing the computation
+### More complex scenarios and scaling up
 
-Big scenario increases computation time. Distribute the computation.
+**To do:** Simplify example in previous section to remove channel name (not
+determinate anymore).
+
+Outline:
+
+1. Often we want to consider more complex scenarios. Introduce `!^n`
+   syntax.  Even for 2 sessions (4 roles) the computation time
+   increases (from instantaneous to ~8 seconds). Number of
+   interleavings to explore in factorial.
+
+2. Distribute the computation! Explain how to do this.
+
+3. Distribution is not sufficient to counter an exponential
+   blowup. Idea: prove a stronger equivalence -- session
+   equivalence: exploit the structure of the process. May lead to
+   false attacks.
+
+4. Another way to counter blowup are POR. Not sound in general, but
+   for _action determinate_ processes. Intuitively, never have 2
+   outputs, or two inputs on the same channel in parallel. Used
+   different channels for each role: this modelling is not always
+   adequate but work well for PAP. (No false attack on the model with
+   different channels.)
 
 
 ### The **deepsec** User Interface
 
 Using the GUI in the example.
+
+
