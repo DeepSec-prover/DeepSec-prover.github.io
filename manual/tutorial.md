@@ -15,8 +15,8 @@
 
   navigation: true
 
-  next_page: Grammar
-  next_page_url: manual/grammar.html
+  next_page: Advanced options
+  next_page_url: manual/advanced.html
   prev_page: Installation
   prev_page_url: manual/install.html
 ---
