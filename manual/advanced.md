@@ -82,6 +82,25 @@ It was also shown in [@BCK-jcs20] that trace equivalence coincides on all three 
 ### Distributing the computation {#distributed}
 
 
+**Deepsec** allows to distribute the computation on multiple cores, as well as on multiple servers. To explain the distribution we need to give a high-level overview on how **deepsec** verifies trace equivalence.
+
+To check trace equivalence **deepsec** needs to compute a large symbolic execution tree, called the _partition tree_: each path in this tree corresponds to a symbolic trace, i.e. a trace that may contain non instantiated variables. Each node in the tree regroups the set of equivalent, symbolic processes, after the execution of the symbolic trace leading to this node. Checking trace equivalence between processes `P` and `Q` then consists in verifying that each node contains at least one process derived from `P` and one derived from `Q`.
+
+The main idea of the distribution is to let different cores explore different branches of the tree.
+
+ * The first step is the _job creation_: we generate, in a breadth-first manner, a number of nodes whose subtrees need to be generated and explored. These nodes are stored in a queue and called _jobs_. The number of such jobs that are initially generated
+
+ * Next each _worker_, i.e., each core, fetches a job and verifies the underlying subtree. When a job is finished, the _worker_ fetches the next job in the queue.
+
+* As the tree is not balanced, some jobs may require much more computation than others (and we cannot predict wich jobs are taking more time). Therefore,  some workers may become idle while others still have a large subtree to verify. When a worker becomes idle, i.e., the queue of pending jobs is empty, we start a _timer_: after the time-out we kill ongoing jobs, and start a new job creation phase to distribute the computation of these remaining large subtrees. This is called a new _round_.
+
+The time-out before staring the next round avoids killing on-going work that is about to finish and get into a job creation -- kill worker loop.
+
+The [command line](#command-distributed) and graphical user interface allow to set the values for
+
+* the number of local and remote workers -- the default is to use all available, physical cores;
+* the minimum number of jobs created in the job creation phase -- the default value is 100 x the number of workers;
+* the round timer -- the default value is 120 seconds.
 
 
 

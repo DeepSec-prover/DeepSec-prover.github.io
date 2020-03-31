@@ -2,7 +2,7 @@
 PANDOC = pandoc --syntax-definition deepsec.xml
 IFORMAT = markdown
 # FLAGS = --standalone --toc --toc-depth=2 --mathjax=$(MATHJAX)
-FLAGS = --standalone --mathjax=$(MATHJAX)
+FLAGS = --standalone --mathjax=$(MATHJAX) 
 # STYLE = style.css
 
 ifdef MATHJAX_LOCAL
