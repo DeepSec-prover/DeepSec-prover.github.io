@@ -73,7 +73,7 @@ deepsec [OPTIONS] FILELIST
 >   Display information about command line options.
 
 
-### Options for distributing computation {#command-distributed)
+### Options for distributing computation {#command-distributed}
 
     -d, --distributed VALUE (default=auto)
 
