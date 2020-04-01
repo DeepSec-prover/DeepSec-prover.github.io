@@ -16,7 +16,7 @@ TEMPLATE_LATEX = template/template.tex
 
 SRC = $(sort $(wildcard manual/*.md)) index_src.md manual.md
 OBJ = $(subst .md,.html,$(SRC))
-SRCPDF = manual.tex manual/install.tex manual/tutorial.tex manual/advanced.tex manual/grammar.tex manual/command.tex template/main.tex 
+SRCPDF = manual.tex manual/install.tex manual/tutorial.tex manual/advanced.tex manual/gui.tex manual/grammar.tex manual/command.tex template/main.tex 
 
 all: $(OBJ) DeepSec-manual.pdf
 

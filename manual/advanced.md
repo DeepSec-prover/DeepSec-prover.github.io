@@ -98,8 +98,8 @@ The time-out before staring the next round avoids killing on-going work that is 
 
 The [command line](#command-distributed) and graphical user interface allow to set the values for
 
-* the number of local and remote workers -- the default is to use all available, physical cores;
-* the minimum number of jobs created in the job creation phase -- the default value is 100 x the number of workers;
+* the number of local and remote workers -- when set to 'auto' all available, physical cores are used;
+* the minimum number of jobs created in the job creation phase -- when set to 'auto' the number of jobs is 100 $\times$ the total number of workers;
 * the round timer -- the default value is 120 seconds.
 
 
