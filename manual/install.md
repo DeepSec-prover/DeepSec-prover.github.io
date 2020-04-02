@@ -15,7 +15,7 @@
 
   navigation: true
 
-  next_page: A small example
+  next_page: Tutorial
   next_page_url: manual/tutorial.html
   prev_page: Introduction
   prev_page_url: manual.html

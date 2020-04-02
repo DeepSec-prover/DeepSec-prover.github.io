@@ -16,10 +16,10 @@
 
   navigation: true
 
-  next_page:
-  next_page_url:
-  prev_page: Grammar
-  prev_page_url: manual/grammar.html
+  next_page: Language reference
+  next_page_url: manual/grammar.html
+  prev_page: The graphical User Interface
+  prev_page_url: manual/gui.html
 ---
 
 ## Command-line options

@@ -15,8 +15,8 @@
 
   navigation: true
 
-  next_page: Grammar
-  next_page_url: manual/grammar.html
+  next_page: The Graphical User Interface
+  next_page_url: manual/gui.html
   prev_page: Tutorial
   prev_page_url: manual/tutorial.html
 ---

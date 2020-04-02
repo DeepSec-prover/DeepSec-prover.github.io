@@ -89,7 +89,7 @@ The function symbol `aenc` is declared to be of arity 2 using the
 > **Note:** public names _vs_ function symbols of arity 0
 >
 > It is possible to declare function symbols of arity 0, e.g. write
-> `fun c/0`. This is equivalent to declaring a free name `free c`.
+> `fun c/0`, or `const c`. This is equivalent to declaring a free name `free c`.
 
 
 

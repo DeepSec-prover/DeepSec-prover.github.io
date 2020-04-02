@@ -15,7 +15,7 @@
 
   navigation: true
 
-  next_page: Graphical User Interface
+  next_page: Command line options
   next_page_url: manual/command.html
   prev_page: Advanced Options
   prev_page_url: manual/advanced.html
@@ -69,9 +69,19 @@ It also displays the processes on which the verification was run and provides an
 
 * The equivalence simulator allows the user to select a trace of one of the processes, by selecting a sequence of actions. The tool highlights available actions and the user chooses the next action. Once the user has selected a trace, one may request the tool to find an equivalent trace on the other process.
 
-* The attack simulator allows the user to ...
+* The attack simulator allows the user to _replay_ an attack: for an attack trace on one process, the user select actions on the other process that follow the attack trace. This allows the user to explore all possible available traces and convince the user that either no such trace exists, or that all traces lead to frames that can be distinguished.
+
+
 
 Selecting the actions requires a few additional explanations:
+ 
+ * The user may select the level of details of the actions: `Default`, `I/O`, and `All`. When `I/O` is selected, only inputs and outputs are shown; internal $\tau$ actions are executed tacitly. When `All` is selected, the user also explicitly executes internal actions. `Default` is an intermediate choice where some internal actions are executed automatically, while others need to be selected explicitly. The `I/O` option is only available in case of an attack, not for an equivalence proof.
+
+
+ * Sometimes, when selecting an input, or an output, the user may choose between an internal communication (matching directly an input and output of the process on a same channel) and a communication with the attacker.
+
+* When defining an attacker action in the equivalence simulator, it might be necessary to provide the attacker computation, called the recipe. This is required to provide the computation of the channel, for both inputs and outputs, as well as the term to be provided by the attacker for an input. These recipes are terms built from the (public) function symbols and constants of the signature, fresh names (prefixed by a `#`, e.g. `#n`) and elements of the frame, referred to as `ax_i`.
+
 
 
 
@@ -91,6 +101,6 @@ The settings allow to configure the **DeepSecUI** environment.
  * The _Notification_ section allows to configure the behaviour of pop-up windows. One can define the duration a pop-up window appears, which result notifications should be notified (batch, run, query), and define whether warning and error pop-ups should be "sticky", i.e., only disappear after manual removal.
 The behaviour can be tested using the _Test Notifications_ button.
  
- * The _Scan for new batch_ button will be explained by Vincent, as I am not completely sure how this works ;-).
+ * The _Scan for new batch_ button allows to scan for batches and runs that were run using the command line. These runs are then added to the list of batches in the _Results_ section. When the `--title` option is used with the [command line](#commad), the provided title will be used in the list.
 
 
