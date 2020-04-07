@@ -33,7 +33,7 @@
 Partial Order Reductions (POR) are a technique to battle state explosion. Given that the number of interleavings of parallel processes is exponential, POR techniques try to avoid the need to explore _all_ interleavings. For example, given actions $a, b, c, d$, sometimes the interleavings $a b c d$ and $a c b d$ may be completely equivalent in the sense that neither of them increases the attacker's power to distinguish. One may think of this as a _partial order_: we need to consider all interleavings such that
 $a$ < $b,c$ <$d$ where < is the precedence relation, but $b$ and $c$ are not ordered. POR techniques then only explore one representative of each class of equivalent interleavings.
 
-*Deepsec* implements the POR techniques presented in [@BDH-concur15]. The techniques are correct for a class of _action determinate_ processes. *Deepsec* checks a slightly stronger, syntactic condition: there are no two parallel processes that have two outputs, respectively inputs, on the same channel.
+*Deepsec* implements the POR techniques presented in [@BDH-concur15]. The techniques are correct for a class of _action determinate_ processes. *Deepsec* checks a slightly stronger, syntactic condition: there are no two parallel processes that have two outputs, respectively inputs, on the same channel, and all channels are public.
 
 By default, the POR optimization is activated automatically whenever this syntactic condition is satisfied. One can manually disable the POR optimization, using either the command line or the graphical user interface. Note that even if POR is set manually to true, it does not change the behavior of non determinate processes in order to guarantee soundness of the result.
 

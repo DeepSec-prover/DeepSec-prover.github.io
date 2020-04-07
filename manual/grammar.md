@@ -91,6 +91,7 @@ A file is a sequence of declarations (\<decl\>), process definitions
 
 | \<query\> ::= `query` `trace_equiv` `(`\<process\>`,`\<process\>`)`.
 |              | `query` `session_equiv` `(`\<process\>`,`\<process\>`)`.
+|              | `query` `session_incl` `(`\<process\>`,`\<process\>`)`.
 
 
 

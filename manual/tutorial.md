@@ -40,13 +40,7 @@ The modelling of the PAP protocol in **deepsec** is available in the
 file
 
 ```bash
-  PrivateAuthentication-1session.dps
-```
-
-located in 
-
-```bash
-  Examples/trace_equivalence/Private_authentication/
+  Examples/tutorial/pap-1-session.dps
 ```
 
 in the **deepsec** directory. We suggest that you move to that
@@ -63,13 +57,13 @@ the necessary declarations. To model PAP we first declare a few constants.
 
 
 ```{.deepsec}
-  free ca, cb, c.
+  free c.
   free ska, skb, skc [private].
 ```
 
-Here, `ca, cb, c` are so-called *free* names: they model public
-constants, that are known to the adversary. In PAP `ca, cb, c` will be
-channel names, as we will see below. On the other hand we need to
+Here, `c` is a so-called *free* name: free names model public
+constants, that are known to the adversary. In PAP `c` will be
+a channel name, as we will see below. On the other hand we need to
 declare *secret* keys. For this we use *private* names `ska, skb, skc`
 that are declared with the additional attribute `[private]`.
 
@@ -80,9 +74,10 @@ Next, we need to declare function symbols to represent asymmetric encryption.
   fun aenc/2.
   fun pk/1.
 ```
+
 The function symbol `aenc` is declared to be of arity 2 using the
-  notation `/2`. Public keys are of arity 1, as they are intended to
-  take a secret key as argument.
+notation `/2`. Public keys are of arity 1, as they are intended to
+take a secret key as argument.
 
 
 
@@ -144,6 +139,19 @@ decryption returns the plaintext `x`.
 >a ternary function.
 
 
+> **Note**: multiple rewrite rules for a single destructor.
+>
+> Note that if a destructor function require several rewrite rules,
+> they should  be defined inside the same reduc.
+> ```{.deepsec}
+   reduc
+      exists_double(x,x,y) -> ok;
+      exists_double(x,y,x) -> ok;
+      exists_double(y,x,x) -> ok.
+  ```
+
+
+
 
 ### Modelling protocols as processes
 
@@ -153,20 +161,19 @@ will be represented by a _process_.  We can model Alice's role by the
 following process `processA`.
 
 ```{.deepsec}
-  let processA(ca,ska,pkb) =
+  let processA(ska,pkb) =
     new na;
-    out(ca,aenc((na,pk(ska)),pkb));
-    in(ca,x).
+    out(c,aenc((na,pk(ska)),pkb));
+    in(c,x).
 ```
 
-The process has 3 arguments: `ca` is the channel on which the process
-communicates, `ska` is the secret key of the agent running this
+The process has 2 arguments: `ska` is the secret key of the agent running this
 process, and `pkb` is the public key of the agent to whom we want to
 connect. First, the process generates a fresh random nonce using the command
-`new na`. Next, it sends on channel `ca` the encryption of the pair `(na,pk(ska))`
+`new na`. Next, it sends on channel `c` the encryption of the pair `(na,pk(ska))`
 encrypted with the recipient's public key `pkb`, as dictated by the
 protocol. Finally, the process expects an input, modelled as
-`in(ca,x)`. Normally, one would expect additional processing of the
+`in(c,x)`. Normally, one would expect additional processing of the
 input message, which we omit here for simplification.
 
 
@@ -184,17 +191,17 @@ Next, we model Bob's behaviour by the process `processB`.
 
 
 ```{.deepsec}
-  let processB(cb,skb,pka) =
-    in(cb,yb);
+  let processB(skb,pka) =
+    in(c,yb);
     new nb;
     let (yna,=pka) = adec(yb,skb) in
-      out(cb,aenc((yna,nb,pk(skb)),pka))
-    else out(cb,aenc(nb,pk(skb))).
+      out(c,aenc((yna,nb,pk(skb)),pka))
+    else out(c,aenc(nb,pk(skb))).
 ```
 
 This process introduces several new constructs that require
 explanations. The first action of the process is to input a message on
-channel `cb` through the instruction `in(cb,yb)`. As a consequence the
+channel `c` through the instruction `in(c,yb)`. As a consequence the
 message that is received will be bound to the variable `yb`. While the
 expected message is `aenc((na,pka)),pk(skb))` we need to keep in mind
 that this message may actually be provided by the attacker and may be
@@ -236,7 +243,6 @@ branches, which is why the above syntactic sugar is often convenient.
 > tuple.
 
 
-
 Finally, we put all the pieces together ia main process `ProcessAB`
 modelling the entire system.
 
@@ -246,7 +252,7 @@ modelling the entire system.
     out(c,pk(skb));
     out(c,pk(skc));
     (
-      processA(ca,ska,pk(skb)) | processB(cb,skb,pk(ska))
+      processA(ska,pk(skb)) | processB(skb,pk(ska))
     ).
 ```
 	
@@ -266,7 +272,7 @@ define a second system `ProcessCB`.
     out(c,pk(skb));
     out(c,pk(skc));
     (
-      processA(ca,skc,pk(skb)) | processB(cb,skb,pk(skc))
+      processA(skc,pk(skb)) | processB(skb,pk(skc))
     ).
 ```
 
@@ -287,7 +293,7 @@ equivalence between these two systems.
 To verify this query we use the command 
 
 ```bash
-  $ deepsec PrivateAuthentication-1session.dps
+  $ deepsec pap-1-session.dps
 ```
 
 
@@ -306,7 +312,7 @@ the decoy message? For this we simply replace the else branch with
 **deepsec** on this modified file.
 
 ```bash
-  $ deepsec PrivateAuthentication-1session-attack.dps
+  $ deepsec pap-1-session-attack.dps
 ```
 
 This time, **deepsec** will report an attack:
@@ -316,35 +322,237 @@ Result query 1: The two processes are not trace equivalent.
 ```
 
 Indeed, when the attacker sends the message
-`in(cb,aenc((n,pk(ska)),pk(skb)))` to B, only the first system will
-send a reply.
+`aenc((n,pk(ska)),pk(skb))` to B, only the first system will send a
+reply.
+
+> **Note:** multiple input files
+>
+> **deepsec** can take several files as input. For example you may run
+> `deepsec pap-1-session.dps pap-1-session-attack.dps`.
 
 
 ### More complex scenarios and scaling up
 
-**To do:** Simplify example in previous section to remove channel name (not
-determinate anymore).
 
-Outline:
+In the previous section we considered a very simple scenario and
+our verification checked whether private authentication holds when we
+have one instance of `A` and `B`. Often, protocols may be secure when
+considering a single session, but attacks may arise when multiple
+sessions are executed in parallel.
 
-1. Often we want to consider more complex scenarios. Introduce `!^n`
-   syntax.  Even for 2 sessions (4 roles) the computation time
-   increases (from instantaneous to ~8 seconds). Number of
-   interleavings to explore in factorial.
+Let us see what happens when we consider two instances of each role
+resulting into the following declarations.
 
-2. Distribute the computation! Explain how to do this.
+```{.deepsec}
+let ProcessAB =
+  out(c,pk(ska));
+  out(c,pk(skb));
+  out(c,pk(skc));
+  (
+    processA(ska,pk(skb)) | processB(skb,pk(ska)) | // B expects to talk to A
+    processA(ska,pk(skb)) | processB(skb,pk(ska))   // B expects to talk to A
+  ).
 
-3. Distribution is not sufficient to counter an exponential
-   blowup. Idea: prove a stronger equivalence -- session
-   equivalence: exploit the structure of the process. May lead to
-   false attacks.
+let ProcessCB =
+  out(c,pk(ska));
+  out(c,pk(skb));
+  out(c,pk(skc));
+  (
+    processA(skc,pk(skb)) | processB(skb,pk(skc)) | // B expects to talk to C
+    processA(ska,pk(skb)) | processB(skb,pk(ska))   // B expects to talk to A
+  ).
+```
 
-4. Another way to counter blowup are POR. Not sound in general, but
-   for _action determinate_ processes. Intuitively, never have 2
-   outputs, or two inputs on the same channel in parallel. Used
-   different channels for each role: this modelling is not always
-   adequate but work well for PAP. (No false attack on the model with
-   different channels.)
+> Note: bounded replication
+>
+> When considering multiple sessions it is common to put in parallel
+> several identical instances. For example, the process `ProcessAB`
+> duplicates `processA(ska,pk(skb))` and
+> `processB(skb,pk(ska))`. In more complex scenarios we may want to
+> copy more processes a large number of times. Therefore **deepsec**
+> provides a convenient operator `!^n`: `!^n P` is syntactic sugar for
+> `n` parallel copies of $P$ where `n` is a positive integer. In the
+> above example
+> ```{.deepsec}
+    processA(ska,pk(skb)) | processB(skb,pk(ska)) |
+    processA(ska,pk(skb)) | processB(skb,pk(ska))
+  ```
+> could have been replaced by 
+> ```{.deepsec}
+    !^2 processA(ska,pk(skb)) | !^2 processB(skb,pk(ska))
+  ```
+
+
+
+
+We can run
+
+```bash
+  $ deepsec pap-2-session.dps
+```
+
+and observe that still no attack is found. However, the verification
+time increases: while the result is instantaneous for 1 session it now
+takes several seconds on a standard laptop. This is due to the fact
+that **deepsec** has to explore **all** possible interleavings, whose
+number is exponential.
+
+While the verification time is still moderate for 2 sessions this is
+not the case anymore when we add a third session.
+
+```bash
+  $ deepsec pap-3-session.dps
+```
+
+will take _much_ longer. How can we ensure that the protocol cannot be
+attacked with 3 sessions, or more? 
+
+#### Distributing the computation
+
+A first way to scale up is to distribute the computation.  By default,
+**deepsec** checks how many physical cores your machine has and
+distributes the computation on these cores by creating the same amount
+of _workers_. To activate the distributed computation with a different
+number of workers, `deepsec` should be run with the option `-l n` (or
+`--local_workers n`) where `n` is the number of desired local
+workers.
+
+It is also possible to distribute computation on several machines. To
+do so, deepsec requires an ssh connexion between the localhost and the
+distant machine, using ssh key authentication, so that no password is
+required. The computation on a distant machine is configured with the
+command line option `-w <host> <path> <n>` (or `--distant_workers
+<host> <path> <n>`). The parameter `<host>` is the ssh login and
+address (e.g my_login@my_host). The parameter `<path>` should indicate
+the path to the deepsec directory on the distant machine. Finally, the
+parameter `<n>` represents the number of cores that should be
+dedicated by this distant machine to the computation of the input
+file.
+
+Note that the option `-distant_workers` must be used for each distant
+machine.
+
+```.bash
+deepsec -w login1@host1 tools/deepsec 15 \
+	    -w login2@host2 deepsec auto my_file.dps
+```
+
+In this command line, the first machine should be accessible with `ssh
+login1@host1` and the **deepsec** directory should be located at
+`~/tools/deepsec` on this machine. Similarly, the second machine
+should be accessible with `ssh login2@host1` and the **deepsec**
+directory should be located at `~/deepsec`. If the connexions to both
+machines are successful, **deepsec** will distribute the computation
+between the local and the 2 distant machines: 15 cores are used on the
+first machine and, by specifying `auto`, all available physical cores
+on the second machine.
+
+> **_Important_**: The localhost and distant machines must have
+> exactly the  same version of **deepsec** (the Git hash is displayed
+> when running `deepsec` without parameters or with the option
+> `--help`), compiled with the same version of **OCaml**.
+
+
+#### Session equivalence
+
+Distribution of the computation may gain a constant speed-up factor:
+going from a 20 hours computation to a 1 hour computation is indeed
+much appreciated, but may not solve the more fundamental problem of
+the exponential blowup.
+
+
+This is why **deepsec** proposes another, more efficient proof
+technique. The underlying idea is to prove a stronger equivalence
+relation, that we call _equivalence by session_. This equivalence
+significantly decreases the number of interleavings and exploits the
+structure of the processes. Often, we want to show the equivalence of
+processes that are of the form
+
+```{.deepsec}
+   let P = P1 | ... | Pn
+   let Q = Q1 | ... | Qn
+```
+
+The rough idea of equivalence by sessions is to match parallel
+sessions rather than individual actions. Here, for instance, one may
+try to match all actions of `P1` by all actions of say `Q3`, all
+actions of `P2` by all actions of `Q1`, etc. **deepsec** still needs
+to explore all possible matches, but this equivalence allows many more
+optimizations than the initial trace equivalence.
+
+For example, we may try to verify a complex scenario with 5 sessions
+on PAP.
+
+```.bash 
+$ deepsec pap-session-equiv-5-sessions.dps 
+```
+
+Now this computation terminates in about a minute on a standard laptop
+(with two cores). Distributing this computation could of course
+improve the verification time.
+
+
+> **Note:** Equivalence by session and false attacks
+>
+> Why shouldn't one always use the more efficient equivalence by session ?
+>As explained above equivalence by session is a stronger equivalence
+>than trace equivalence. Therefore whenever equivalence by session is
+>satisfied, trace equivalence also holds. The converse may however not
+>be true, and equivalence by session may lead to a _false attack_
+>(with respect to trace equivalence). This is witnessed by the
+>following small example
+> ```{.deepsec}
+    let P = out(c,a) ; out(c,a).
+    let Q = out(c,a) | out(c,a).
+	query trace_equiv(P,Q).
+	query session_equiv(P,Q).
+  ```
+> and can be tested using **deepsec**.
+> ```.bash
+    $ deepsec trace-vs-session.dps 
+  ```
+
+
+
+
+> **Note:** Syntactic restriction
+>
+> The theory of equivalence by session requires that all channels are 
+> only (public or private) names or constants, i.e., no complex terms, nor variables.
+
+
+
+#### Partial-order reduction techniques
+
+Probably the most effective way to fight state explosion are partial
+order reduction (POR) techniques. **Deepsec** implements powerful POR
+optimizations, that were designed in [@BDH-concur15]. These techniques
+are however only sound on a class of _action-determinate_ processes: a
+process is action determinate when it never can reach a state where
+two outputs, or two inputs on a same channel are executable. Moreover,
+the processes may not use _private_ channels. A simple, sufficient
+criterion is to check that syntactically no outputs on a same channel
+appear in parallel, and similarly for inputs, and that all channels
+are public. **Deepsec** automatically checks this criterion, and when
+satisfied enables POR techniques.
+
+
+A pragmatic way to ensure action determinacy is to use a different
+channel name for each process in parallel. It is easy to modify the
+specification of PAP in that way. This modelling allows for a
+spectacular efficiency gain. The verification of a scenario with 9
+sessions terminates in a few seconds.
+
+```.bash
+   $ deepsec pap-por-9-sessions.dps
+```
+
+Again, one may wonder why one should not always use different channel
+names for parallel processes? Intuitively, using different channels
+for parallel sessions allows the attacker to identify the session that
+has sent the message. While this works well for the PAP protocol, some
+protocols precisely rely on this _sender ambiguity_ to ensure some
+form of anonymity.
 
 
 ### The **deepsec** User Interface

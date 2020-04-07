@@ -537,8 +537,9 @@ a:hover {
 .page-header {
     color: #fff;
     text-align: center;
-    background-color: #159957;
-    background-image: linear-gradient(120deg, #155799, #159957)
+    background-color: #00a1e6;
+    /* background-color: #159957; */
+    /* background-image: linear-gradient(120deg, #155799, #159957) */
 }
 
 @media screen and (min-width: 64em) {
@@ -584,8 +585,9 @@ a:hover {
 
 .project-tagline {
     margin-bottom: 2rem;
-    font-weight: normal;
-    opacity: 0.7
+    font-weight: bold;
+    color: #ffffeb;
+    /* opacity: 0.7 */
 }
 
 @media screen and (min-width: 64em) {
@@ -654,7 +656,7 @@ a:hover {
     margin-top: 2rem;
     margin-bottom: 1rem;
     font-weight: normal;
-    color: #159957
+    color: #306696 /* #159957 */
 }
 
 .main-content p {
