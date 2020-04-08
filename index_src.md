@@ -5,7 +5,7 @@
     - name : Steve Kremer
       webpage : https://members.loria.fr/SKremer
     - name : Itsaka Rakotonirina
-      webpage : http://www.dptinfo.ens-cachan.fr/~irakoton
+      webpage : https://members.loria.fr/IRakotonirina/
 
   title: DeepSec prover
   pagetitle: Index
@@ -20,7 +20,7 @@
   link-citations: true
 
   nocite: |
-    @CKR-sp18, @CKR-cav18, @CKR-ccs19, @BCK-jcs20
+    @*
 ---
 
 
