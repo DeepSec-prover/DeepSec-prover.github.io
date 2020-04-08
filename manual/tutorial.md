@@ -557,6 +557,84 @@ form of anonymity.
 
 ### The **deepsec** User Interface
 
-Using the GUI in the example.
+**Deepsec** also comes with a graphical user interface (GUI). The GUI
+is intended to provide an easy to use environment for using
+**deepsec**, browsing the results and simulating attacks as well as
+equivalence proofs.
+
+
+The GUI is launched by executing the **DeepSec UI** application. This
+is a standalone application that communicates with **deepsec** by
+making calls to the **deepsec_api** executable. Therefore, you should
+make sure that this executable is in your system path. (Otherwise we
+can manually configure the path to **deepsec_api**, see below).
+
+When launching **DeepSec UI** you should arrive at the following
+welcome screen.
+
+
+![DeepSec UI welcome screen](img/start-run.png "Welcome  Screen  allowing to load files.")\
+
+From this screen you can navigate through the 3 main sections of the
+GUI (displayed on the left):
+* Start Run
+* Results
+* Settings
+
+Normally you should see a "pop-up" confirming that  **deepsec_api**
+has been successfully detected. If not you will get a _warning_
+pop-up. This notification only appears for a few second. If the
+executable was not detected you may manually specify the path by
+clicking on _Settings_ and providing the _Absolute Path of deepsec\_api_.
+
+![Settings](img/settings.png "Absolute path to deepsec_api can be
+ specified in Settings.")\
+
+You may test that the executable is indeed available in the specified
+path by clicking on _Check API_.
+
+We can now navigate back to the _Start Run_ section and select the
+files with the specifications to be analysed. Let us select the
+`pap-1-session` and `pap-1-session-attack` that we used previously
+(available in `Examples/tutorial/` in the **deepsec** folder). The GUI
+allows you to select multiple files and such a collection of files is
+called a _batch_. Each file of this _batch_ is called a _run_ and such
+a run may contain multiple _queries_, as several queries may be
+specified in a same file.
+
+In order to reference this batch we may provide a title,
+e.g. `Tutorial`. The `Start Run` section also allows for more advanced
+settings (_Semantics_, _Distributed_), but we currently keep the
+default settings.
+
+![Batch](img/batch.png "Files selected for the Tutorial batch.")\
+
+We can now start the verification by clicking on the _Start Batch_
+button. Pop-up windows will notify about the status of the
+verification.
+
+Navigating to the results section we now see the list of all previous
+verifications including the _Tutorial_ batch.
+
+![Results](img/results.png "Showing the list of runs and batches.")\
+
+Clicking on the tutorial batch we can display additional
+information. You may inspect the Run options and Versions to see the
+precise parameters and software versions used to run this batch.
+
+Clicking on `pap-1-session` and then `Query 1` allows to reveal
+additional information about the individual run and query.
+
+![Detailed results of a given run and query](img/pap-1-sessions-result.png "Displaying results of Query 1 of the run pap-1-session.")\
+
+We can now inspect the _Details_ of `Query 1`. The first part of the
+screen provides a summary of the query, recalling the declarations of
+the file and showing the result of the verification.
+
+![Deatailed information on Query 1](img/summary-equivalent.png "Detailed summary on Query 1.")\
+
+
+
+
 
 

@@ -7,6 +7,7 @@ header-includes:
    - \usepackage[tt=false]{libertine}
    - \usepackage{textcomp}
    - \usepackage{graphicx}
+   - \setkeys{Gin}{width=\textwidth}
    - \usepackage{amsmath}
    - \usepackage{amssymb}
    - \usepackage{amsthm}
