@@ -44,7 +44,7 @@ Current maintainer: [Vincent Cheval](https://members.loria.fr/VCheval/)
 
 # Documentation
 
-The DeepSec user manual is available [here](manual.html).
+The DeepSec user manual is available [here](manual/).
 
 
 # Source code
