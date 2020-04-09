@@ -41,7 +41,7 @@ subterm convergent destructor rewrite system.
 [Vincent Cheval](https://members.loria.fr/VCheval/),
 [Steve Kremer](https://members.loria.fr/SKremer/),
 [Itsaka Rakotonirina](https://members.loria.fr/IRakotonirina/),
-[Victor Yon] (https://www.linkedin.com/in/victor-yon/)
+[Victor Yon](https://www.linkedin.com/in/victor-yon/)
 
 Current maintainer: [Vincent Cheval](https://members.loria.fr/VCheval/)
 
