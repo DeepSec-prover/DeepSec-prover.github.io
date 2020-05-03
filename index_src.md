@@ -38,7 +38,11 @@ subterm convergent destructor rewrite system.
 
 # Team
 
-[Vincent Cheval](https://members.loria.fr/VCheval/), [Steve Kremer](https://members.loria.fr/SKremer/), [Itsaka Rakotonirina](https://members.loria.fr/IRakotonirina/).
+[Vincent Cheval](https://members.loria.fr/VCheval/),
+[Steve Kremer](https://members.loria.fr/SKremer/),
+[Itsaka Rakotonirina](https://members.loria.fr/IRakotonirina/),
+[Victor Yon](https://www.linkedin.com/in/victor-yon/)
+
 Current maintainer: [Vincent Cheval](https://members.loria.fr/VCheval/)
 
 A mailing list is also available for general discussions on **DeepSec** and announcements of new releases.
